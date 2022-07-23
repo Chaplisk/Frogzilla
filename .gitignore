@@ -1,0 +1,52 @@
+# ===========================
+# Default Collab Ignore Rules
+# ===========================
+
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Cc]aptures/
+
+# OS Generated
+# ============
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+[Tt]humbs.db
+[Dd]esktop.ini
+
+# Visual Studio / MonoDevelop generated	
+# =====================================
+[Ee]xported[Oo]bj/
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+*.vs
+*.blend1
+*.blend1.meta
+
+# Jetbrains IDE Generated
+# =======================
+.idea
+
+# Unity generated
+# ===============
+[Oo]bj/
+[Bb]uild
+sysinfo.txt
+*.stackdump
+Assets/Ludiq/Bolt.Flow/Generated/UnitOptions.db
+Assets/GPUInstancer/Resources/Settings/GPUInstancerShaderBindings.asset
+Assets/GPUInstancer/Resources/Settings/GPUIShaderVariantCollection.shadervariants
