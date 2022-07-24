@@ -33,6 +33,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b416c20-bf40-416b-aa31-5094e69a95e7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -72,11 +80,22 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d63e153f-9e72-4422-b23a-f816697a6507"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65275c21-cfec-4df3-85ac-be14539e259a"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -89,6 +108,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_General = asset.FindActionMap("General", throwIfNotFound: true);
         m_General_HorizontalMovement = m_General.FindAction("HorizontalMovement", throwIfNotFound: true);
         m_General_Fire = m_General.FindAction("Fire", throwIfNotFound: true);
+        m_General_Jump = m_General.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -140,12 +160,14 @@ public class @Controls : IInputActionCollection, IDisposable
     private IGeneralActions m_GeneralActionsCallbackInterface;
     private readonly InputAction m_General_HorizontalMovement;
     private readonly InputAction m_General_Fire;
+    private readonly InputAction m_General_Jump;
     public struct GeneralActions
     {
         private @Controls m_Wrapper;
         public GeneralActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @HorizontalMovement => m_Wrapper.m_General_HorizontalMovement;
         public InputAction @Fire => m_Wrapper.m_General_Fire;
+        public InputAction @Jump => m_Wrapper.m_General_Jump;
         public InputActionMap Get() { return m_Wrapper.m_General; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -161,6 +183,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Fire.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnFire;
+                @Jump.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_GeneralActionsCallbackInterface = instance;
             if (instance != null)
@@ -171,6 +196,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -179,5 +207,6 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnHorizontalMovement(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
