@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce89ec6ea6b4a2341bfdecc8169f2e01, type: 3}
+  m_Name: TempleCompleted
+  m_EditorClassIdentifier: 
+  delay: 0
+  _audioGroup: Environment
+  _useVolumeRange: 0
+  _volume: 0.945
+  _volumeRange: {x: 0, y: 0}
+  _spatialBlend: 0
+  _usePitchRange: 0
+  _pitch: 1
+  _pitchRange: {x: 1, y: 1}
+  _priority: 128
+  _audioClipBanks:
+  - Clips:
+    - {fileID: 8300000, guid: 044da08b543df514bab11384a504eb89, type: 3}
+  spatialize: 1
+  volumeMultiplier: -1

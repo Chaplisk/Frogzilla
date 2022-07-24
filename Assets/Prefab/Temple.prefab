@@ -33883,7 +33883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7178375970494104291}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.22, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7178375971353159066}
@@ -34186,6 +34186,12 @@ MonoBehaviour:
   _temple1: {fileID: 7178375970086069050}
   _temple2: {fileID: 7178375971612858224}
   _temple3: {fileID: 7178375970494104300}
+  _livingThings:
+  - {fileID: 0}
+  _deadThings:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _particles: {fileID: 1358565850}
   _leavesParticles:
   - {fileID: 1405156183}
@@ -34210,6 +34216,9 @@ MonoBehaviour:
   _t2RestorationTarget: 50
   _t3RestorationTarget: 100
   _transitionDuration: 0.5
+  _deadLivingTransitionDuration: 1
+  _playSound: {fileID: 11400000, guid: 51e6945316d73b74b86cda18be23948d, type: 2}
+  _templeCompleted: {fileID: 11400000, guid: 214005cca66338a49be50fbcfc6ca5ff, type: 2}
   _health: 0
 --- !u!58 &7178375971353159067
 CircleCollider2D:
@@ -34252,7 +34261,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7178375971612858231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7178375971353159066}

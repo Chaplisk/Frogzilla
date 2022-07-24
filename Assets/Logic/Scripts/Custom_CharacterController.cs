@@ -6,6 +6,8 @@ using UnityAtoms.BaseAtoms;
 
 public class Custom_CharacterController : MonoBehaviour
 {
+    public bool canMove;
+
     [SerializeField] private float _moveSpeed;
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private GameObject _model;
@@ -21,20 +23,36 @@ public class Custom_CharacterController : MonoBehaviour
     [SerializeField] private float _shakeMinimumNotGroundedDelay;
     [SerializeField] private float _atterrissageShakeIntensity;
     [SerializeField] private float _atterrissageShakeDuration;
+    [SerializeField] private AudioSource _waterJetSound;
+    [SerializeField] private float _waterJetSoundLerpSpeed;
 
     private float _horizontalAxis;
     private Vector3 _modelBaseScale;
     private bool _isFiring;
     private float _jumpTimer;
     private float _timerSinceNotGrounded;
+    private float _waterJetSoundBaseVolume;
+    private float _waterJetSoundTargetVolume;
 
     private void Awake()
     {
         _modelBaseScale = _model.transform.localScale;
+
+        _waterJetSoundBaseVolume = _waterJetSound.volume;
+        _waterJetSound.volume = 0.0f;
+    }
+
+    public void StartPlayer()
+    {
+        _rigidBody.simulated = true;
+        canMove = true;
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
+        if (canMove == false)
+            return;
+
         if (_jumpTimer < _jumpCooldown)
             return;
 
@@ -45,6 +63,7 @@ public class Custom_CharacterController : MonoBehaviour
         {
             _jumpTimer = 0.0f;
             _rigidBody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            print("jump");
         }
     }
 
@@ -58,6 +77,9 @@ public class Custom_CharacterController : MonoBehaviour
 
     public void HorizontalMovement(InputAction.CallbackContext context)
     {
+        if (canMove == false)
+            return;
+
         float v = context.ReadValue<float>();
         _horizontalAxis = v;
 
@@ -114,6 +136,9 @@ public class Custom_CharacterController : MonoBehaviour
 
         _isGrounded = CheckGround();
         _animator.SetBool("inAir", !_isGrounded);
+
+        _waterJetSoundTargetVolume = _isFiring ? _waterJetSoundBaseVolume : 0.0f;
+        _waterJetSound.volume = Mathf.Lerp(_waterJetSound.volume, _waterJetSoundTargetVolume, Time.deltaTime * _waterJetSoundLerpSpeed);
 
     }
 

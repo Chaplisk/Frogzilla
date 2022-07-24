@@ -41,6 +41,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""PassDialog"",
+                    ""type"": ""Button"",
+                    ""id"": ""7042843c-0f71-4ef8-a54c-92881784d6ca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -98,6 +106,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57ef8254-fd4d-49fa-ab82-ed590a5a9a85"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PassDialog"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -109,6 +128,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_General_HorizontalMovement = m_General.FindAction("HorizontalMovement", throwIfNotFound: true);
         m_General_Fire = m_General.FindAction("Fire", throwIfNotFound: true);
         m_General_Jump = m_General.FindAction("Jump", throwIfNotFound: true);
+        m_General_PassDialog = m_General.FindAction("PassDialog", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,6 +181,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_General_HorizontalMovement;
     private readonly InputAction m_General_Fire;
     private readonly InputAction m_General_Jump;
+    private readonly InputAction m_General_PassDialog;
     public struct GeneralActions
     {
         private @Controls m_Wrapper;
@@ -168,6 +189,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @HorizontalMovement => m_Wrapper.m_General_HorizontalMovement;
         public InputAction @Fire => m_Wrapper.m_General_Fire;
         public InputAction @Jump => m_Wrapper.m_General_Jump;
+        public InputAction @PassDialog => m_Wrapper.m_General_PassDialog;
         public InputActionMap Get() { return m_Wrapper.m_General; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -186,6 +208,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnJump;
+                @PassDialog.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnPassDialog;
+                @PassDialog.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnPassDialog;
+                @PassDialog.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnPassDialog;
             }
             m_Wrapper.m_GeneralActionsCallbackInterface = instance;
             if (instance != null)
@@ -199,6 +224,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @PassDialog.started += instance.OnPassDialog;
+                @PassDialog.performed += instance.OnPassDialog;
+                @PassDialog.canceled += instance.OnPassDialog;
             }
         }
     }
@@ -208,5 +236,6 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnHorizontalMovement(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnPassDialog(InputAction.CallbackContext context);
     }
 }

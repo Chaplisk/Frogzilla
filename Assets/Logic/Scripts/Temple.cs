@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityAtoms;
 
 public class Temple : MonoBehaviour
 {
+    public bool Completed => _t3Restored;
+
     [SerializeField] private float _fillSpeed;
     [SerializeField] private int _babySpawned;
 
@@ -31,6 +34,9 @@ public class Temple : MonoBehaviour
     [SerializeField] private float _t2RestorationTarget, _t3RestorationTarget;
     [SerializeField] private float _transitionDuration;
     [SerializeField] private float _deadLivingTransitionDuration;
+
+    [SerializeField] private AudioDataPlayerEvent _playSound;
+    [SerializeField] private AudioData _templeCompleted;
 
     [SerializeField] private float _health;
     private bool _t2Restored, _t3Restored;
@@ -84,6 +90,8 @@ public class Temple : MonoBehaviour
 
             foreach (SpriteRenderer sr in _livingThings)
                 StartCoroutine(FadeSprite(sr, 1.0f, _deadLivingTransitionDuration));
+
+            _playSound.Raise(new AudioDataPlayer(_templeCompleted, transform.position));
         }
 
         _fill.fillAmount = _health / _t3RestorationTarget;
