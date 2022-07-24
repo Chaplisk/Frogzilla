@@ -12,6 +12,8 @@ public class Temple : MonoBehaviour
     [SerializeField] private SpriteRenderer _temple2;
     [SerializeField] private SpriteRenderer _temple3;
 
+    [SerializeField] private GameObject _particles;
+
     [SerializeField] private Image _fill;
     [SerializeField] private CanvasGroup _canvasGroup;
 
@@ -52,6 +54,8 @@ public class Temple : MonoBehaviour
             }
 
             StartCoroutine(FadeCanvasGroup(_canvasGroup, 0.0f, 1.0f));
+
+            _particles.SetActive(true);
         }
 
         _fill.fillAmount = _health / _t3RestorationTarget;
